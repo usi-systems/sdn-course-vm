@@ -4,4 +4,13 @@ cd ~
 git clone git://github.com/p4lang/p4factory.git
 
 cd ~/p4factory/
-./install.sh
+git submodule update --init --recursive
+
+./install_deps.sh
+
+sudo tools/veth_setup.sh
+./autogen.sh
+./configure
+
+cd targets/basic_routing
+make bm
