@@ -2,8 +2,8 @@
 You have to install [vagrant](https://www.vagrantup.com) before running following commands
 
 ```
-git clone https://github.com/usi-systems/SDN-starter.git
-cd SDN-starter
+git clone https://github.com/usi-systems/sdn-course-vm.git
+cd sdn-course-vm
 vagrant up
 ```
 
