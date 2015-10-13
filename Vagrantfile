@@ -19,12 +19,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  #config.vm.network :forwarded_port, guest:6633, host:6635 # forwarding of port 
  
  ## Provisioning
- config.vm.provision :shell, privileged: false, :path => "setup/basic-setup.sh"
- config.vm.provision :shell, privileged: false, :path => "setup/mininet-setup.sh"
- config.vm.provision :shell, privileged: false, :path => "setup/ryu-setup.sh"
+ config.vm.provision :puppet
  config.vm.provision :shell, privileged: false, :path => "setup/p4tut-setup.sh"
  config.vm.provision :shell, privileged: false, :path => "setup/spin-setup.sh"
- config.vm.provision :shell, privileged: false, :path => "setup/swi-prolog-setup.sh"
  config.vm.provision :shell, privileged: false, :path => "setup/datalog-setup.sh"
 
  ## SSH config

@@ -1,6 +1,10 @@
 #!/bin/sh
-wget http://spinroot.com/spin/Src/spin643.tar.gz
-tar xzvf spin643.tar.gz
+if [ ! -f "spin643.tar.gz" ]; then 
+	wget http://spinroot.com/spin/Src/spin643.tar.gz
+fi
+if [ ! -d "Spin" ]; then
+	tar xzvf spin*.tar.gz
+fi
 cd Spin/Src*
 make
-echo "PATH=\$PATH:`pwd`" >> ~/.bashrc
+export PATH=\$PATH:`pwd`
