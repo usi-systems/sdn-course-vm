@@ -12,7 +12,7 @@ $pipPackages = [ "alabaster", "greenlet", "networkx" , "decorator", "eventlet", 
 package { $essentials: }
 
 package { $pipPackages:
-  ensure => latest,
+  ensure => present,
   provider => pip,
   require => Package[$essentials],
 }

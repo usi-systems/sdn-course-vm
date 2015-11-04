@@ -20,9 +20,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  
  ## Provisioning
  config.vm.provision :puppet
- config.vm.provision :shell, privileged: false, :path => "setup/p4tut-setup.sh"
- config.vm.provision :shell, privileged: false, :path => "setup/spin-setup.sh"
- config.vm.provision :shell, privileged: false, :path => "setup/datalog-setup.sh"
+ config.vm.provision :shell, privileged: false, :path => "setup/p4-setup.sh"
+ #config.vm.provision :shell, privileged: false, :path => "setup/p4tut-setup.sh"
+ #config.vm.provision :shell, privileged: false, :path => "setup/spin-setup.sh"
+ #config.vm.provision :shell, privileged: false, :path => "setup/datalog-setup.sh"
 
  ## SSH config
  config.ssh.forward_x11 = true
