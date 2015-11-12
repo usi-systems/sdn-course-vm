@@ -1,6 +1,4 @@
 #!/bin/sh
-sudo pip install scapy thrift
-cd ~
 
 # install p4c-bmv2
 git clone https://github.com/p4lang/p4c-bm.git p4c-bmv2

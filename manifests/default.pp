@@ -5,7 +5,7 @@ exec {"apt-get update":
 
 Package { ensure => "installed" }
 
-$essentials  = [   "build-essential", "fakeroot", "debhelper", "autoconf", "automake", "libssl-dev", "graphviz", "python-all", "python-qt4", "python-twisted-conch", "libtool", "tmux", "vim", "python-pip", "python-paramiko", "python-sphinx", "python-dev" , "ssh", "emacs", "sshfs", "python-routes", "bison", "git"]
+$essentials  = [ "build-essential", "fakeroot", "debhelper", "autoconf", "automake", "libssl-dev", "graphviz", "python-all", "python-qt4", "python-twisted-conch", "libtool", "tmux", "vim", "python-pip", "python-paramiko", "python-sphinx", "python-dev" , "ssh", "emacs", "sshfs", "python-routes", "bison", "git", "xterm", "firefox" ]
 
 $pipPackages = [ "alabaster", "greenlet", "networkx" , "decorator", "eventlet", "msgpack-python", "oslo.config", "scapy", "thrift" ]
 
