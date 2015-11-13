@@ -1,6 +1,18 @@
-exec {"apt-get update":
-    path => "/usr/bin",
+#-Global Execution params----
+
+Exec {
+          path => "/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:/sbin:/bin/sh",
+          user => root,
+          #logoutput => true,
 }
+
+#--apt-update Triggers-----
+
+exec { "apt-update":
+    command => "sudo apt-get update -y",
+}
+
+Exec["apt-update"] -> Package <| |> #This means that an apt-update command has to be triggered before any package is installed
 
 
 Package { ensure => "installed" }
@@ -25,12 +37,10 @@ package { "ryu":
 
 package {"openvswitch-switch":
   ensure  => present,
-  require => Exec["apt-get update"],
 }
 
 package {"openvswitch-controller":
   ensure  => present,
-  require => Exec["apt-get update"],
 }
 
 package {"mininet":
