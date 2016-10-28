@@ -61,3 +61,7 @@ package {"swi-prolog":
   ensure => "installed",
   require => Exec["apt-add-repository ppa:swi-prolog/stable"],
 }
+
+package {"wireshark":
+  ensure => latest,
+}
