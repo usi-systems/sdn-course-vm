@@ -12,15 +12,19 @@ exec { "apt-update":
     command => "sudo apt-get update -y",
 }
 
-Exec["apt-update"] -> Package <| |> #This means that an apt-update command has to be triggered before any package is installed
+Exec["apt-update"] -> Package <| |> #apt-update before any package is installed
 
 
 Package { ensure => "installed" }
 
-$essentials  = [ "build-essential", "fakeroot", "debhelper", "autoconf", "automake", "libssl-dev", "graphviz", "python-all", "python-qt4", "python-twisted-conch", "libtool", "tmux", 
-                 "vim", "python-pip", "python-paramiko", "python-sphinx", "python-dev" , "ssh", "emacs", "sshfs", "python-routes", "bison", "git", "xterm", "firefox"  ]
+$essentials  = [ "build-essential", "fakeroot", "debhelper", "autoconf", "automake",
+                  "libssl-dev", "graphviz", "python-all", "python-qt4",
+                  "python-twisted-conch", "libtool", "tmux", "vim", "python-pip",
+                  "python-paramiko", "python-sphinx", "python-dev" , "ssh", "emacs",
+                  "sshfs", "python-routes", "bison", "git", "xterm", "firefox"  ]
 
-$pipPackages = [ "alabaster", "greenlet", "networkx" , "decorator", "eventlet", "msgpack-python", "oslo.config", "scapy", "thrift" ]
+$pipPackages = [ "alabaster", "greenlet", "networkx" , "decorator", "eventlet",
+                  "msgpack-python", "oslo.config", "scapy", "thrift" ]
 
 package { $essentials: }
 
@@ -37,5 +41,9 @@ package { "ryu":
 }
 
 package {"wireshark":
+  ensure => latest,
+}
+
+package {"traceroute":
   ensure => latest,
 }
