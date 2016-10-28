@@ -8,6 +8,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   config.vm.box = "ubuntu/trusty64"
+  config.vm.provider "virtualbox" do |v|
+    v.name = "adv-net"
+  end
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -20,6 +23,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  
  ## Provisioning
  config.vm.provision :puppet
+ config.vm.provision :shell, privileged: false, :path => "setup/mininet.sh"
  #config.vm.provision :shell, privileged: false, :path => "setup/p4paxos-setup.sh"
  #config.vm.provision :shell, privileged: false, :path => "setup/p4-setup.sh"
  #config.vm.provision :shell, privileged: false, :path => "setup/p4tut-setup.sh"

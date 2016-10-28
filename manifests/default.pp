@@ -35,18 +35,18 @@ package { "ryu":
   require => Package["python-routes", "eventlet", "msgpack-python", "oslo.config"],
 }
 
-package {"openvswitch-switch":
-  ensure  => present,
-}
-
-package {"openvswitch-controller":
-  ensure  => present,
-}
-
-package {"mininet":
-  ensure  => latest,
-  require => Package["openvswitch-switch", "openvswitch-controller"],
-}
+#package {"openvswitch-switch":
+#  ensure  => present,
+#}
+#
+#package {"openvswitch-controller":
+#  ensure  => present,
+#}
+#
+#package {"mininet":
+#  ensure  => latest,
+#  require => Package["openvswitch-switch", "openvswitch-controller"],
+#}
 
 # install swipl
 package {"software-properties-common": 
