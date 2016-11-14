@@ -25,3 +25,11 @@ Run `vagrant ssh` at the top level directory
 * `vagrant up --provision` or `vagrant reload --provision`
 
 
+## Install BMV2
+If you already ran vagrant up before, please do:
+
+`vagrant provision --provision-with shell`
+
+Then, add virtual interfaces for Bmv2 switch:
+
+`sudo /vagrant/veth_setup.sh`
