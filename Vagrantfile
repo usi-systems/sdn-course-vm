@@ -19,12 +19,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  ## Guest Config
  config.vm.hostname = "usi-sdn"
  config.vm.network :private_network, ip: "192.168.0.100"
- #config.vm.network :forwarded_port, guest:6633, host:6635 # forwarding of port 
+ config.vm.network :forwarded_port, guest:8080, host:8080 # forwarding of port
  
  ## Provisioning
  config.vm.provision :puppet
  config.vm.provision :shell, privileged: false, :path => "setup/mininet.sh"
  config.vm.provision :shell, privileged: false, :path => "setup/ltprotocol.sh"
+ config.vm.provision :shell, privileged: false, :path => "setup/bmv2.sh"
 
  ## SSH config
  config.ssh.forward_x11 = true
