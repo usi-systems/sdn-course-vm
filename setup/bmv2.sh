@@ -4,6 +4,10 @@
 sudo apt-get install -y git autoconf python-pip build-essential python-dev \
     cmake libjudy-dev libgmp-dev libpcap-dev mktemp libffi-dev r-base gawk
 
+sudo rm -rf behavioral-model p4c-bm
+git clone https://github.com/p4lang/behavioral-model.git
+git clone https://github.com/p4lang/p4c-bm.git
+
 # # install thrift
 sudo apt-get install -y libboost-dev libboost-test-dev libboost-program-options-dev \
 libboost-filesystem-dev libboost-thread-dev libevent-dev automake libtool \
@@ -18,11 +22,8 @@ cd thrift-0.9.3
 --with-erlang=no --with-go=no --with-nodejs=no
 sudo make -j2
 sudo make install
-
 cd ..
-git clone https://github.com/p4lang/behavioral-model.git
 # install nanomsg
-cd $tmpdir
 bash ../behavioral-model/travis/install-nanomsg.sh
 sudo ldconfig
 
@@ -40,10 +41,7 @@ cd behavioral-model
 ./configure
 sudo make
 
-cd ..
-git clone https://github.com/p4lang/p4c-bm.git
-
-cd p4c-bm
+cd ../p4c-bm
 sudo pip install -r requirements.txt
 sudo pip install -r requirements_v1_1.txt
 sudo python setup.py install

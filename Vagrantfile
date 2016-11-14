@@ -23,8 +23,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  
  ## Provisioning
  config.vm.provision :puppet
- config.vm.provision :shell, privileged: false, :path => "setup/mininet.sh"
- config.vm.provision :shell, privileged: false, :path => "setup/ltprotocol.sh"
+ #config.vm.provision :shell, privileged: false, :path => "setup/mininet.sh"
+ #config.vm.provision :shell, privileged: false, :path => "setup/ltprotocol.sh"
  config.vm.provision :shell, privileged: false, :path => "setup/bmv2.sh"
 
  ## SSH config
