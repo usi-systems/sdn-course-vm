@@ -35,7 +35,7 @@ package { $pipPackages:
 }
 
 package { "ryu":
-  ensure => latest,
+  ensure => present,
   provider => pip,
   require => Package["python-routes", "eventlet", "msgpack-python", "oslo.config"],
 }
