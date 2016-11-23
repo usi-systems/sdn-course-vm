@@ -4,10 +4,11 @@
 sudo apt-get install -y git autoconf python-pip build-essential python-dev \
     cmake libjudy-dev libgmp-dev libpcap-dev mktemp libffi-dev r-base gawk
 
-sudo rm -rf bmv2 p4c-bmv2 behavioral-model p4c-bm
+sudo rm -rf bmv2 p4c-bmv2 behavioral-model p4c-bm p4-tutorials
 
 git clone https://github.com/p4lang/behavioral-model.git bmv2
 git clone https://github.com/p4lang/p4c-bm.git p4c-bmv2
+git clone https://github.com/p4lang/tutorials.git p4-tutorials
 
 # # install thrift
 sudo apt-get install -y libboost-dev libboost-test-dev libboost-program-options-dev \
