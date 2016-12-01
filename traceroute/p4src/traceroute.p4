@@ -8,20 +8,25 @@ header_type ethernet_t {
 
 header_type easyroute_head_t {
     fields {
-        num_valid: 32;
+        num_valid : 32;
     }
 }
 
+/* TODO: define the easyroute_port header */
 
-header_type easyroute_port_t {
+
+// the metadata needed in parsing variable number of ports
+header_type easy_route_metadata_t {
     fields {
-        port: 8;
+        num_port : 32;
     }
 }
+
 
 header ethernet_t eth;
 header easyroute_head_t easyroute_head;
-header easyroute_port_t easyroute_port;
+/* TODO: initialize the easyroute_port header(s) */
+header easy_route_metadata_t ingress_meta;
 
 parser start {
     return parse_ethernet;
@@ -36,42 +41,53 @@ parser parse_ethernet {
     }
 }
 
-parser parse_head {
-    extract(easyroute_head);
-    return select(latest.num_valid) {
-        0: ingress;
-        default: parse_port;
-    }
-}
 
-parser parse_port {
-    extract(easyroute_port);
+parser parse_head {
+    /* TODO: extract header and parse ports if needed */
     return ingress;
 }
+
+/* TODO: add parser for the easyroute_port */
+
 
 action _drop() {
     drop();
 }
 
-action route() {
-    modify_field(standard_metadata.egress_spec, easyroute_port.port);
-    add_to_field(easyroute_head.num_valid, -1);
-    remove_header(easyroute_port);
+action _nop() {
+
 }
 
-table route_pkt {
+action add_port() {
+    /* TODO: increase number of ports */
+    /* TODO: add easyroute_port to the header stack (HINT: push header) */
+    /* TODO: modify the easyroute_port by the output port */
+}
+
+action add_easyroute_head() {
+    /* TODO: add easyroute_head */
+    add_port();
+    modify_field(eth.dl_type, EASYROUTE);
+}
+
+/* TODO: define the traceroute table (HINT: match on the ethernet type) */
+
+action forward(port) {
+    modify_field(standard_metadata.egress_spec, port);
+}
+
+table forward_tbl {
     reads {
-        easyroute_port: valid;
-    }
-    actions {
+        eth.dl_dst : exact;
+    } actions {
+        forward;
         _drop;
-        route;
     }
-    size: 1;
 }
 
 control ingress {
-    apply(route_pkt);
+    apply(forward_tbl);
+    /* TODO: apply the table to add easyroute head and ports  */
 }
 
 control egress {

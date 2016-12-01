@@ -15,11 +15,15 @@ class EasyPort(Packet):
 
 bind_layers(Ether, EasyRoute, type=0x6900)
 
-def client(itf):
-    eth = Ether(src="00:00:00:00:00:01", dst="00:00:00:00:00:03")
-    p = eth / EasyRoute(num_port=3) / EasyPort(port=2) / EasyPort(port=3) / EasyPort(port=1) / "Hello"
+
+def client(args):
+    eth = Ether(src="00:00:00:00:00:01", dst="00:00:00:00:00:03", type=0x6901)
+    if args.trace:
+        p = eth / "Hello"
+    else:
+        p = eth / EasyRoute(num_port=3) / EasyPort(port=2) / EasyPort(port=3) / EasyPort(port=1) / "Hello"
     p.show()
-    sendp(p, iface = itf)
+    sendp(p, iface = args.interface)
 
 def handle(x):
     x.show()
@@ -31,13 +35,14 @@ def main():
     parser = argparse.ArgumentParser(description='receiver and sender to test P4 program')
     parser.add_argument("-s", "--server", help="run as server", action="store_true")
     parser.add_argument("-c", "--client", help="run as client", action="store_true")
+    parser.add_argument("-t", "--trace", help="run trace route", default=True, action="store_true")
     parser.add_argument("-i", "--interface", default='eth0', help="bind to specified interface")
     args = parser.parse_args()
 
     if args.server:
         server(args.interface)
     elif args.client:
-        client(args.interface)
+        client(args)
     else:
         parser.print_help()
 
